@@ -136,7 +136,7 @@ export function ToBackIcon(props) {
   );
 }
 
-export function TakePhotoIcon(props) {
+export function MakePhotoIcon(props) {
   return (
     <Svg
       width={60}
