@@ -48,6 +48,7 @@ export default function DefaultScreen({ navigation }) {
           options={{
             title: "Create Publication",
             style: { marginHorizontal: 31 },
+            tabBarStyle: { display: "none" },
             tabBarIcon: () => {
               return <CreatePostIcon />;
             },
