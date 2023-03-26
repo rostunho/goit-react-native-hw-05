@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Keyboard } from "react-native";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import Avatar from "../../components/Avatar";
-import Input from "../../components/Input";
+import AuthInput from "../../components/AuthInput";
 import AuthButtons from "../../components/AuthButtons";
 
 export default function RegistrationScreen({ navigation }) {
@@ -55,7 +55,7 @@ export default function RegistrationScreen({ navigation }) {
         <Avatar />
         <Text style={styles.title}>Registration</Text>
         <View style={styles.form}>
-          <Input
+          <AuthInput
             placeholder="Login"
             value={login}
             onFocus={() => setIsKeyboardVisible(true)}
@@ -63,7 +63,7 @@ export default function RegistrationScreen({ navigation }) {
               setLogin(value);
             }}
           />
-          <Input
+          <AuthInput
             placeholder="Email"
             value={email}
             onFocus={() => setIsKeyboardVisible(true)}
@@ -71,7 +71,7 @@ export default function RegistrationScreen({ navigation }) {
               setEmail(value);
             }}
           />
-          <Input
+          <AuthInput
             placeholder="Password"
             secured
             value={password}

@@ -1,4 +1,5 @@
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import SubmitButton from "./SubmitButton";
 
 export default function AuthButtons({
   text,
@@ -9,13 +10,14 @@ export default function AuthButtons({
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity
+        <SubmitButton onSubmit={onSubmit} text={text} />
+        {/* <TouchableOpacity
           style={styles.button}
           activeOpacity={0.75}
           onPress={onSubmit}
         >
           <Text style={styles.text}>{text}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.secondaryView}>
         <TouchableOpacity
@@ -34,20 +36,20 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 16,
   },
-  button: {
-    height: 50,
-    marginTop: 27,
-    marginBottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 100,
-    backgroundColor: "#FF6C00",
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#fff",
-  },
+  // button: {
+  //   height: 50,
+  //   marginTop: 27,
+  //   marginBottom: 0,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderRadius: 100,
+  //   backgroundColor: "#FF6C00",
+  // },
+  // text: {
+  //   fontSize: 16,
+  //   lineHeight: 19,
+  //   color: "#fff",
+  // },
   secondaryView: {
     justifyContent: "center",
     alignItems: "center",

@@ -1,19 +1,31 @@
 import { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Dimensions, Alert, Button } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker";
 import CameraView from "./CameraView";
 import PhotoPreview from "./PhotoPreview";
 import Notification from "./Notification";
 
-export default function PhotoViewer({ setPhoto }) {
+export default function PhotoViewer({ setPhoto, photo }) {
   const [picture, setPicture] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [hasLibraryPermission, setHasLibraryPermission] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const cameraRef = useRef();
 
-  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+  useEffect(() => {
+    setPicture(photo);
+  }, [photo]);
+
+  // const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
   useEffect(() => {
     (async () => {
@@ -47,6 +59,24 @@ export default function PhotoViewer({ setPhoto }) {
   //     requestPermission();
   //     Alert.alert(permissionResponse.status);
   //   };
+
+  const pickImage = async () => {
+    try {
+      const photoFromLibrary = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [16, 9],
+        quality: 1,
+      });
+
+      if (photoFromLibrary.canceled) {
+        return Alert.alert("Photo uploading failed or canceled");
+      }
+      setPicture(photoFromLibrary.assets[0]);
+    } catch (error) {
+      return Alert.alert(error.message);
+    }
+  };
 
   const onPressTrigger = async () => {
     const photo = await __makePhoto();
@@ -83,14 +113,24 @@ export default function PhotoViewer({ setPhoto }) {
   return (
     <>
       {/* <Button title="CHECK PERMISSIONS" onPress={checkPermissions} /> */}
-      <View style={styles.cameraBox}>
-        {picture ? (
-          <PhotoPreview source={{ uri: picture.uri }} onPress={clearPreview} />
-        ) : hasCameraPermission ? (
-          <CameraView ref={cameraRef} onPress={onPressTrigger} />
-        ) : (
-          <Notification message={errorMessage} />
-        )}
+      <View style={styles.container}>
+        <View style={styles.cameraBox}>
+          {picture ? (
+            <PhotoPreview
+              source={{ uri: picture.uri }}
+              onPress={clearPreview}
+            />
+          ) : hasCameraPermission ? (
+            <CameraView ref={cameraRef} onPress={onPressTrigger} />
+          ) : (
+            <Notification message={errorMessage} />
+          )}
+        </View>
+        <TouchableOpacity style={styles.textWrapper} onPress={pickImage}>
+          <Text style={styles.text}>
+            {!picture ? "Upload photo" : "Edit photo"}
+          </Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -98,8 +138,9 @@ export default function PhotoViewer({ setPhoto }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "flex-start",
+    alignItems: "center",
     paddingTop: 32,
     paddingLeft: 16,
     paddingRight: 16,
@@ -108,10 +149,20 @@ const styles = StyleSheet.create({
   cameraBox: {
     width: Dimensions.get("window").width - 32,
     height: (Dimensions.get("window").width - 32) / 1.5,
-    alignItems: "center",
+    // alignItems: "center",
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "rgb(232, 232, 232)",
     overflow: "hidden",
+  },
+  textWrapper: {
+    width: "100%",
+    alignItems: "flex-start",
+    paddingTop: 8,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#BDBDBD",
   },
 });

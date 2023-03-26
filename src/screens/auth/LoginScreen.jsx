@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Keyboard, StyleSheet, View, Text } from "react-native";
 import ScreenWrapper from "../../components/ScreenWrapper";
-import Input from "../../components/Input";
+import AuthInput from "../../components/AuthInput";
 import AuthButtons from "../../components/AuthButtons";
 
 export default function LoginScreen({ navigation }) {
@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }) {
       >
         <Text style={styles.title}>Log In</Text>
         <View style={styles.form}>
-          <Input
+          <AuthInput
             placeholder="Email"
             value={email}
             onFocus={() => setIsKeyboardVisible(true)}
@@ -57,7 +57,7 @@ export default function LoginScreen({ navigation }) {
               setEmail(value);
             }}
           />
-          <Input
+          <AuthInput
             placeholder="Password"
             secured
             value={password}

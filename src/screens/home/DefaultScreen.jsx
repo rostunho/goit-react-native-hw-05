@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, TouchableHighlight, StyleSheet } from "react-native";
 import PostsScreen from "../main/PostsScreen";
 import CreatePostScreen from "../main/CreatePostScreen";
 import ProfileScreen from "../main/ProfileScreen";
@@ -8,6 +8,7 @@ import {
   PostsIcon,
   CreatePostIcon,
   ProfileIcon,
+  GoBackIcon,
 } from "../../assets/custom-icons";
 
 const MainTab = createBottomTabNavigator();
@@ -19,16 +20,6 @@ export default function DefaultScreen({ navigation }) {
         initialRouteName="Posts"
         screenOptions={{
           ...options.screen,
-          headerRight: () => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.75}
-                onPress={() => navigation.navigate("Login")}
-              >
-                <LogOutIcon />
-              </TouchableOpacity>
-            );
-          },
         }}
       >
         <MainTab.Screen
@@ -38,6 +29,16 @@ export default function DefaultScreen({ navigation }) {
             title: "Publications",
             tabBarIcon: ({ focused }) => {
               return <PostsIcon focused={focused} />;
+            },
+            headerRight: () => {
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={() => navigation.navigate("Login")}
+                >
+                  <LogOutIcon />
+                </TouchableOpacity>
+              );
             },
           }}
         />
@@ -50,7 +51,26 @@ export default function DefaultScreen({ navigation }) {
             style: { marginHorizontal: 31 },
             tabBarStyle: { display: "none" },
             tabBarIcon: () => {
-              return <CreatePostIcon />;
+              return (
+                <TouchableHighlight
+                  activeOpacity={0.25}
+                  underlayColor="#DE5E00"
+                  style={{ borderRadius: 20 }}
+                  onPress={() => navigation.navigate("CreatePost")}
+                >
+                  <CreatePostIcon />
+                </TouchableHighlight>
+              );
+            },
+            headerLeft: () => {
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={() => navigation.navigate("Posts")}
+                >
+                  <GoBackIcon />
+                </TouchableOpacity>
+              );
             },
           }}
         />

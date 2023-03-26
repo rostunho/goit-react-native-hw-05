@@ -6,24 +6,27 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { LocationIcon } from "../assets/custom-icons";
 
-export default function Input({
+export default function PostInput({
   placeholder,
-  secured = false,
+  location = false,
   value,
   onFocus,
   onBlur,
   onChangeText,
 }) {
-  const [isPassShowed, setIsPassShowed] = useState(secured ? true : false);
+  // maybe delete later
+  const [isPassShowed, setIsPassShowed] = useState(location ? true : false);
 
   const togglePassShowing = () => {
     setIsPassShowed((prevState) => !prevState);
   };
+  //
 
   return (
     <>
-      {!secured ? (
+      {!location ? (
         <TextInput
           style={styles.input}
           placeholder={placeholder}
@@ -36,23 +39,20 @@ export default function Input({
       ) : (
         <View>
           <TextInput
-            style={styles.input}
-            placeholder="Password"
+            style={{ ...styles.input, paddingLeft: 28 }}
+            placeholder={placeholder}
             placeholderTextColor="#BDBDBD"
             value={value}
             onFocus={onFocus}
             onBlur={onBlur}
             onChangeText={onChangeText}
-            secureTextEntry={isPassShowed ? true : false}
           />
           <TouchableOpacity
-            style={styles.showPassBtn}
+            style={styles.iconWrapper}
             activeOpacity={0.75}
             onPress={togglePassShowing}
           >
-            <Text style={styles.showPassText}>
-              {isPassShowed ? "Show" : "Hide"}
-            </Text>
+            <LocationIcon />
           </TouchableOpacity>
         </View>
       )}
@@ -65,23 +65,15 @@ const styles = StyleSheet.create({
     height: 50,
     marginHorizontal: 16,
     marginBottom: 16,
-    paddingLeft: 16,
     fontSize: 16,
     lineHeight: 19,
     color: "#212121",
-    backgroundColor: "#F6F6F6",
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderColor: "#E8E8E8",
-    borderRadius: 8,
   },
-  showPassBtn: {
+  iconWrapper: {
     position: "absolute",
-    top: 16,
-    right: 32,
-  },
-  showPassText: {
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#1B4371",
+    top: 13,
+    left: 12,
   },
 });

@@ -116,7 +116,7 @@ export function ProfileIcon(props) {
   );
 }
 
-export function ToBackIcon(props) {
+export function GoBackIcon(props) {
   return (
     <Svg
       width={24}
@@ -153,6 +153,70 @@ export function MakePhotoIcon(props) {
       <Defs>
         <ClipPath id="prefix__clip0_36716_98">
           <Path fill="#fff" transform="translate(18 18)" d="M0 0h24v24H0z" />
+        </ClipPath>
+      </Defs>
+    </Svg>
+  );
+}
+
+export function LocationIcon(props) {
+  return (
+    <Svg
+      width={24}
+      height={24}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        clipRule="evenodd"
+        d="M20 10.364C20 16.09 12 21 12 21s-8-4.91-8-10.636C4 6.297 7.582 3 12 3s8 3.297 8 7.364v0z"
+        stroke="#BDBDBD"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M12 14a3 3 0 100-6 3 3 0 000 6z"
+        stroke="#BDBDBD"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+export function ClearFormIcon(props) {
+  return (
+    <Svg
+      width={70}
+      height={40}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <G clipPath="url(#prefix__clip0_36_58)">
+        <Rect width={70} height={40} rx={20} fill="#F6F6F6" />
+        <Path
+          d="M26 14h18"
+          stroke="#BDBDBD"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path
+          d="M42.5 14a.5.5 0 00-1 0h1zm-14 0a.5.5 0 00-1 0h1zm2 0a.5.5 0 001 0h-1zm8 0a.5.5 0 001 0h-1zm3 0v14h1V14h-1zm0 14a1.5 1.5 0 01-1.5 1.5v1a2.5 2.5 0 002.5-2.5h-1zM40 29.5H30v1h10v-1zm-10 0a1.5 1.5 0 01-1.5-1.5h-1a2.5 2.5 0 002.5 2.5v-1zM28.5 28V14h-1v14h1zm3-14v-2h-1v2h1zm0-2a1.5 1.5 0 011.5-1.5v-1a2.5 2.5 0 00-2.5 2.5h1zm1.5-1.5h4v-1h-4v1zm4 0a1.5 1.5 0 011.5 1.5h1A2.5 2.5 0 0037 9.5v1zm1.5 1.5v2h1v-2h-1z"
+          fill="#BDBDBD"
+        />
+        <Path
+          d="M33 19v6M37 19v6"
+          stroke="#BDBDBD"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </G>
+      <Defs>
+        <ClipPath id="prefix__clip0_36_58">
+          <Path fill="#fff" d="M0 0h70v40H0z" />
         </ClipPath>
       </Defs>
     </Svg>
