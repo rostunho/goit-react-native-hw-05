@@ -1,19 +1,71 @@
-import { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { useEffect, useState } from "react";
+import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import * as Location from "expo-location";
+import { nanoid } from "nanoid";
 import PhotoViewer from "../../components/PhotoViewer";
 import PostInput from "../../components/PostInput";
 import SubmitButton from "../../components/SubmitButton";
 import { ClearFormIcon } from "../../assets/custom-icons";
 
-export default function CreatePostScreen() {
+export default function CreatePostScreen({ navigation }) {
   const [photo, setPhoto] = useState(null);
-  const [photoTitle, setPhotoTitle] = useState(null);
-  const [photoLocation, setPhotoLocation] = useState(null);
+  const [photoTitle, setPhotoTitle] = useState("");
+  const [locationTitle, setLocationTitle] = useState("");
+  const [hasLocationPermision, setHasLocationPermision] = useState(false);
+  // const [location, setLocation] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const location = await Location.requestForegroundPermissionsAsync();
+        if (!location.granted) {
+          setErrorMessage("Permission to access location was denied");
+          return;
+        }
+        setHasLocationPermision(true);
+      } catch (error) {
+        return Alert.alert(error.message);
+      }
+    })();
+  }, []);
+
+  const onPublishHandler = async () => {
+    if (!photo) {
+      return Alert.alert("You should choose or take a photo for publication.");
+    }
+
+    try {
+      if (!hasLocationPermision) {
+        return Alert.alert(errorMessage);
+      }
+
+      const location = await Location.getCurrentPositionAsync({});
+      const data = createPost(location);
+      navigation.navigate("Posts", data);
+      clearForm();
+    } catch (error) {
+      return Alert.alert(error.message);
+    }
+  };
 
   const clearForm = () => {
     setPhoto(null);
-    setPhotoTitle(null);
-    setPhotoLocation(null);
+    setPhotoTitle("");
+    setLocationTitle("");
+    // setLocation(false);
+  };
+
+  const createPost = (location) => {
+    const newPost = {
+      id: nanoid(4).toString(),
+      photo: photo,
+      photoTitle: photoTitle,
+      location: location,
+      locationTitle: locationTitle,
+      comments: [],
+    };
+    return newPost;
   };
 
   return (
@@ -28,11 +80,15 @@ export default function CreatePostScreen() {
         <PostInput
           location
           placeholder="Location"
-          onChangeText={setPhotoLocation}
-          value={photoLocation}
+          onChangeText={setLocationTitle}
+          value={locationTitle}
         />
       </View>
-      <SubmitButton text="Publish" style={{ marginTop: 32 }} />
+      <SubmitButton
+        text="Publish"
+        style={{ marginTop: 32 }}
+        onSubmit={onPublishHandler}
+      />
       <TouchableOpacity style={styles.button}>
         <ClearFormIcon onPress={clearForm} />
       </TouchableOpacity>

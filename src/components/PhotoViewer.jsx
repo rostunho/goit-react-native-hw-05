@@ -25,7 +25,9 @@ export default function PhotoViewer({ setPhoto, photo }) {
     setPicture(photo);
   }, [photo]);
 
-  // const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+  useEffect(() => {
+    setPhoto(picture);
+  }, [picture]);
 
   useEffect(() => {
     (async () => {
@@ -50,15 +52,6 @@ export default function PhotoViewer({ setPhoto, photo }) {
       }
     })();
   }, []);
-
-  useEffect(() => {
-    setPhoto(picture);
-  }, [picture]);
-
-  //   const checkPermissions = async () => {
-  //     requestPermission();
-  //     Alert.alert(permissionResponse.status);
-  //   };
 
   const pickImage = async () => {
     try {
@@ -88,6 +81,10 @@ export default function PhotoViewer({ setPhoto, photo }) {
   };
 
   const __makePhoto = async () => {
+    if (!hasCameraPermission) {
+      return Alert.alert(errorMessage);
+    }
+
     try {
       const photo = await cameraRef.current.takePictureAsync();
       setPicture(photo);
