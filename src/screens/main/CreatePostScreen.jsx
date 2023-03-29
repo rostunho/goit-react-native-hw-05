@@ -60,7 +60,7 @@ export default function CreatePostScreen({ navigation }) {
 
   const createPost = (location) => {
     const newPost = {
-      // id: nanoid(4).toString(),
+      id: nanoid(4).toString(),
       photo: photo,
       photoTitle: photoTitle,
       location: location,
