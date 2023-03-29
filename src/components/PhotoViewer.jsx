@@ -14,7 +14,7 @@ import CameraView from "./CameraView";
 import PhotoPreview from "./PhotoPreview";
 import Notification from "./Notification";
 
-export default function PhotoViewer({ setPhoto, photo }) {
+export default function PhotoViewer({ setPhoto, photo, focused }) {
   const [picture, setPicture] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [hasLibraryPermission, setHasLibraryPermission] = useState(false);
@@ -118,7 +118,11 @@ export default function PhotoViewer({ setPhoto, photo }) {
               onPress={clearPreview}
             />
           ) : hasCameraPermission ? (
-            <CameraView ref={cameraRef} onPress={onPressTrigger} />
+            <CameraView
+              ref={cameraRef}
+              onPress={onPressTrigger}
+              focused={focused}
+            />
           ) : (
             <Notification message={errorMessage} />
           )}

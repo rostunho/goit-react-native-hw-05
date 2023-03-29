@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import * as Location from "expo-location";
+import { useIsFocused } from "@react-navigation/native";
 import { nanoid } from "nanoid";
 import PhotoViewer from "../../components/PhotoViewer";
 import PostInput from "../../components/PostInput";
@@ -14,6 +15,7 @@ export default function CreatePostScreen({ navigation }) {
   const [hasLocationPermision, setHasLocationPermision] = useState(false);
   // const [location, setLocation] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -58,7 +60,7 @@ export default function CreatePostScreen({ navigation }) {
 
   const createPost = (location) => {
     const newPost = {
-      id: nanoid(4).toString(),
+      // id: nanoid(4).toString(),
       photo: photo,
       photoTitle: photoTitle,
       location: location,
@@ -70,7 +72,7 @@ export default function CreatePostScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <PhotoViewer setPhoto={setPhoto} photo={photo} />
+      <PhotoViewer setPhoto={setPhoto} photo={photo} focused={isFocused} />
       <View style={styles.form}>
         <PostInput
           placeholder="Photo Title"

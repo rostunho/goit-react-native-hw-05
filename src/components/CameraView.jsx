@@ -6,12 +6,14 @@ import { MakePhotoIcon } from "../assets/custom-icons";
 const CameraView = forwardRef((props, ref) => {
   console.dir(Camera);
   return (
-    <Camera style={styles.camera} ref={ref} ratio="1:1" zoom={0}>
-      <TouchableOpacity onPress={props.onPress}>
-        <MakePhotoIcon />
-        {/* <Text style={{ color: "#fff" }}>Camera View</Text>git */}
-      </TouchableOpacity>
-    </Camera>
+    props.focused && (
+      <Camera style={styles.camera} ref={ref} ratio="1:1" zoom={0}>
+        <TouchableOpacity onPress={props.onPress}>
+          <MakePhotoIcon />
+          {/* <Text style={{ color: "#fff" }}>Camera View</Text>git */}
+        </TouchableOpacity>
+      </Camera>
+    )
   );
 });
 
