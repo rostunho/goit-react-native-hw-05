@@ -4,20 +4,14 @@ import SubmitButton from "./SubmitButton";
 export default function AuthButtons({
   text,
   secondaryText,
+  style,
   onSubmit,
   onRedirect,
 }) {
   return (
-    <>
+    <View style={style}>
       <View style={styles.container}>
         <SubmitButton onSubmit={onSubmit} text={text} />
-        {/* <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.75}
-          onPress={onSubmit}
-        >
-          <Text style={styles.text}>{text}</Text>
-        </TouchableOpacity> */}
       </View>
       <View style={styles.secondaryView}>
         <TouchableOpacity
@@ -28,7 +22,7 @@ export default function AuthButtons({
           <Text style={styles.secondaryText}>{secondaryText}</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 }
 
@@ -36,20 +30,6 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 16,
   },
-  // button: {
-  //   height: 50,
-  //   marginTop: 27,
-  //   marginBottom: 0,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   borderRadius: 100,
-  //   backgroundColor: "#FF6C00",
-  // },
-  // text: {
-  //   fontSize: 16,
-  //   lineHeight: 19,
-  //   color: "#fff",
-  // },
   secondaryView: {
     justifyContent: "center",
     alignItems: "center",
@@ -60,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   secondaryText: {
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",

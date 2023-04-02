@@ -37,9 +37,6 @@ export default function ScreenWrapper({
 const styles = StyleSheet.create({
   avoidingView: {
     flex: 1,
-    // width: Dimensions.get("window").width,
-    // height: Dimensions.get("window").height,
-    // justifyContent: "flex-end",
   },
   container: {
     flex: 1,

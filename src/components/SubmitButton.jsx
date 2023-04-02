@@ -15,14 +15,13 @@ export default function SubmitButton({ onSubmit, text, style }) {
 const styles = StyleSheet.create({
   button: {
     height: 50,
-    marginTop: 27,
-    marginBottom: 0,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 100,
     backgroundColor: "#FF6C00",
   },
   text: {
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     color: "#fff",

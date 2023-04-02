@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { StyleSheet, View, Text, Keyboard } from "react-native";
 import ScreenWrapper from "../../components/ScreenWrapper";
 import Avatar from "../../components/Avatar";
@@ -10,20 +10,6 @@ export default function RegistrationScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-
-  useEffect(() => {
-    const show = Keyboard.addListener("keyboardDidShow", () =>
-      setIsKeyboardVisible(true)
-    );
-    const hide = Keyboard.addListener("keyboardDidHide", () =>
-      setIsKeyboardVisible(false)
-    );
-
-    return () => {
-      show.remove();
-      hide.remove();
-    };
-  }, []);
 
   const handleSubmit = () => {
     console.log("Login :", login);
@@ -45,11 +31,11 @@ export default function RegistrationScreen({ navigation }) {
   };
 
   return (
-    <ScreenWrapper keyboardVerticalOffset={-307} onPress={onOutputPress}>
+    <ScreenWrapper keyboardVerticalOffset={-330} onPress={onOutputPress}>
       <View
         style={{
           ...styles.container,
-          paddingBottom: isKeyboardVisible ? 307 : 45,
+          paddingBottom: isKeyboardVisible ? 330 : 78,
         }}
       >
         <Avatar />
@@ -59,26 +45,23 @@ export default function RegistrationScreen({ navigation }) {
             placeholder="Login"
             value={login}
             onFocus={() => setIsKeyboardVisible(true)}
-            onChangeText={(value) => {
-              setLogin(value);
-            }}
+            onSubmitEditing={() => setIsKeyboardVisible(false)}
+            onChangeText={(value) => setLogin(value)}
           />
           <AuthInput
             placeholder="Email"
             value={email}
             onFocus={() => setIsKeyboardVisible(true)}
-            onChangeText={(value) => {
-              setEmail(value);
-            }}
+            onSubmitEditing={() => setIsKeyboardVisible(false)}
+            onChangeText={(value) => setEmail(value)}
           />
           <AuthInput
             placeholder="Password"
             secured
             value={password}
             onFocus={() => setIsKeyboardVisible(true)}
-            onChangeText={(value) => {
-              setPassword(value);
-            }}
+            onSubmitEditing={() => setIsKeyboardVisible(false)}
+            onChangeText={(value) => setPassword(value)}
           />
 
           {!isKeyboardVisible && (
@@ -106,13 +89,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   title: {
+    fontFamily: "Roboto-Medium",
     fontSize: 30,
-    fontWeight: "500",
     lineHeight: 35.16,
     marginBottom: 32,
   },
   form: {
     width: "100%",
-    // height: 300,
   },
 });

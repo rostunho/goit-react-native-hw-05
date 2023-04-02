@@ -15,15 +15,8 @@ export default function PostInput({
   onFocus,
   onBlur,
   onChangeText,
+  onSubmitEditing,
 }) {
-  // maybe delete later
-  const [isPassShowed, setIsPassShowed] = useState(location ? true : false);
-
-  const togglePassShowing = () => {
-    setIsPassShowed((prevState) => !prevState);
-  };
-  //
-
   return (
     <>
       {!location ? (
@@ -35,6 +28,7 @@ export default function PostInput({
           onBlur={onBlur}
           value={value}
           onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
         />
       ) : (
         <View>
@@ -46,11 +40,12 @@ export default function PostInput({
             onFocus={onFocus}
             onBlur={onBlur}
             onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
           />
           <TouchableOpacity
             style={styles.iconWrapper}
             activeOpacity={0.75}
-            onPress={togglePassShowing}
+            // onPress={togglePassShowing}
           >
             <LocationIcon />
           </TouchableOpacity>

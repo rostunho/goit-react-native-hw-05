@@ -86,7 +86,9 @@ export default function PhotoViewer({ setPhoto, photo, focused }) {
     }
 
     try {
-      const photo = await cameraRef.current.takePictureAsync();
+      const photo = await cameraRef.current.takePictureAsync({
+        scale: 1,
+      });
       setPicture(photo);
       return photo;
     } catch (error) {
@@ -139,7 +141,6 @@ export default function PhotoViewer({ setPhoto, photo, focused }) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
     paddingTop: 32,
@@ -150,7 +151,6 @@ const styles = StyleSheet.create({
   cameraBox: {
     width: Dimensions.get("window").width - 32,
     height: (Dimensions.get("window").width - 32) / 1.5,
-    // alignItems: "center",
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "rgb(232, 232, 232)",

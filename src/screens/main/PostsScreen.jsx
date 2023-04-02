@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import Post from "../../components/Post";
 
-export default function PostsScreen({ route }) {
+export default function PostsScreen({ route, navigation }) {
   const [posts, setPosts] = useState([]);
-
-  // console.log(route);
-  // console.log(posts);
-  posts.length > 0 && console.log(posts[0].photo.uri);
 
   useEffect(() => {
     const newPost = route.params;
@@ -25,6 +21,14 @@ export default function PostsScreen({ route }) {
               source={{ uri: item.photo.uri }}
               photoTitle={item.photoTitle}
               locationTitle={item.locationTitle}
+              onCommentsPress={() => navigation.navigate("Comments")}
+              onLocationPress={() =>
+                navigation.navigate("Map", {
+                  location: item.location,
+                  detectedLocation: item.detectedLocation,
+                })
+              }
+              //
             />
           )}
         />
@@ -38,6 +42,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#fff",
-    // alignItems: "center",
   },
 });

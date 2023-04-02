@@ -110,7 +110,7 @@ const options = {
     tabBarShowLabel: false,
     headerTitleAlign: "center",
     headerStyle: styles.header,
-    headerTitleStyle: { fontSize: 17 },
+    headerTitleStyle: { fontFamily: "Roboto-Medium", fontSize: 17 },
     headerRightContainerStyle: { paddingRight: 16 },
     headerLeftContainerStyle: { paddingLeft: 16 },
   },

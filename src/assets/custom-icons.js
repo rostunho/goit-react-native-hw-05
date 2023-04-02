@@ -168,20 +168,41 @@ export function LocationIcon(props) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <Path
-        clipRule="evenodd"
-        d="M20 10.364C20 16.09 12 21 12 21s-8-4.91-8-10.636C4 6.297 7.582 3 12 3s8 3.297 8 7.364v0z"
-        stroke="#BDBDBD"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        clipRule="evenodd"
-        d="M12 14a3 3 0 100-6 3 3 0 000 6z"
-        stroke="#BDBDBD"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      {props.filled ? (
+        <>
+          <Path
+            clipRule="evenodd"
+            d="M20 10.364C20 16.09 12 21 12 21s-8-4.91-8-10.636C4 6.297 7.582 3 12 3s8 3.297 8 7.364v0z"
+            stroke="#FF6C00"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <Path
+            clipRule="evenodd"
+            d="M12 14a3 3 0 100-6 3 3 0 000 6z"
+            stroke="#FF6C00"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </>
+      ) : (
+        <>
+          <Path
+            clipRule="evenodd"
+            d="M20 10.364C20 16.09 12 21 12 21s-8-4.91-8-10.636C4 6.297 7.582 3 12 3s8 3.297 8 7.364v0z"
+            stroke="#BDBDBD"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <Path
+            clipRule="evenodd"
+            d="M12 14a3 3 0 100-6 3 3 0 000 6z"
+            stroke="#BDBDBD"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </>
+      )}
     </Svg>
   );
 }
@@ -252,21 +273,21 @@ export function CommentsIcon(props) {
   );
 }
 
-// function Icon(props) {
-//   return (
-//     <Svg
-//       width={24}
-//       height={24}
-//       fill="none"
-//       xmlns="http://www.w3.org/2000/svg"
-//       {...props}
-//     >
-//       <Path
-//         fillRule="evenodd"
-//         clipRule="evenodd"
-//         d="M3 11.5a8.38 8.38 0 00.9 3.8 8.5 8.5 0 007.6 4.7 8.38 8.38 0 003.8-.9L21 21l-1.9-5.7a8.38 8.38 0 00.9-3.8 8.5 8.5 0 00-4.7-7.6 8.38 8.38 0 00-3.8-.9H11a8.48 8.48 0 00-8 8v.5z"
-//         fill="#FF6C00"
-//       />
-//     </Svg>
-//   );
-// }
+export function LocationMarkerIcon(props) {
+  return (
+    <svg
+      width={40}
+      height={50}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M40 20C40 8.954 31.046 0 20 0S0 8.954 0 20c0 13.627 20 30 20 30s20-16.373 20-30zm-20 7a8 8 0 100-16 8 8 0 000 16z"
+        fill="#FF6C00"
+      />
+    </svg>
+  );
+}

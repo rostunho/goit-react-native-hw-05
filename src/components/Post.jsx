@@ -4,29 +4,61 @@ import {
   View,
   Image,
   Dimensions,
-  TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { CommentsIcon, LocationIcon } from "../assets/custom-icons";
+import { useState } from "react";
 
 export default function Post({
   source,
   photoTitle,
   locationTitle,
   commentsCount = 0,
+  onCommentsPress,
+  onLocationPress,
 }) {
+  const [locationPressed, setLocationPressed] = useState(false);
+  const [commentsPressed, setCommentsPressed] = useState(false);
+
   return (
     <View style={styles.container}>
       <Image source={source} style={styles.image} />
       <Text style={styles.title}>{photoTitle}</Text>
       <View style={styles.interactiveArea}>
-        <View style={styles.commentsArea}>
-          <CommentsIcon />
-          <Text style={styles.commentsCount}>{commentsCount}</Text>
-        </View>
-        <TouchableOpacity style={styles.locationArea}>
-          <LocationIcon />
-          <Text style={styles.location}>{locationTitle}</Text>
-        </TouchableOpacity>
+        <Pressable
+          onPressIn={() => setCommentsPressed(true)}
+          onPress={onCommentsPress}
+          onPressOut={() => setCommentsPressed(false)}
+        >
+          <View style={styles.commentsArea}>
+            <CommentsIcon filled={commentsPressed ? true : false} />
+            <Text
+              style={{
+                ...styles.commentsCount,
+                color: commentsPressed ? "#FF6C00" : "#BDBDBD",
+              }}
+            >
+              {commentsCount}
+            </Text>
+          </View>
+        </Pressable>
+        <Pressable
+          onPressIn={() => setLocationPressed(true)}
+          onPress={onLocationPress}
+          onPressOut={() => setLocationPressed(false)}
+        >
+          <View style={styles.locationArea} onPress={() => {}}>
+            <LocationIcon filled={locationPressed ? true : false} />
+            <Text
+              style={{
+                ...styles.location,
+                color: locationPressed ? "#FF6C00" : "#212121",
+              }}
+            >
+              {locationTitle}
+            </Text>
+          </View>
+        </Pressable>
       </View>
     </View>
   );
@@ -65,7 +97,6 @@ const styles = StyleSheet.create({
   commentsCount: {
     fontSize: 16,
     lineHeight: 19,
-    color: "#BDBDBD",
   },
   locationArea: {
     flexDirection: "row",

@@ -14,6 +14,7 @@ export default function AuthInput({
   onFocus,
   onBlur,
   onChangeText,
+  onSubmitEditing,
 }) {
   const [isPassShowed, setIsPassShowed] = useState(secured ? true : false);
 
@@ -32,6 +33,7 @@ export default function AuthInput({
           onBlur={onBlur}
           value={value}
           onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
         />
       ) : (
         <View>
@@ -43,6 +45,7 @@ export default function AuthInput({
             onFocus={onFocus}
             onBlur={onBlur}
             onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
             secureTextEntry={isPassShowed ? true : false}
           />
           <TouchableOpacity
@@ -66,6 +69,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 16,
     paddingLeft: 16,
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     color: "#212121",
@@ -80,46 +84,9 @@ const styles = StyleSheet.create({
     right: 32,
   },
   showPassText: {
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
   },
 });
-
-{
-  /* <>
-  {!secured ? (
-    <TextInput
-      style={styles.input}
-      placeholder={placeholder}
-      placeholderTextColor="#BDBDBD"
-      onFocus={onFocus}
-      onBlur={onBlur}
-      value={value}
-      onChangeText={onChangeText}
-    />
-  ) : (
-    <View>
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#BDBDBD"
-        value={value}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onChangeText={onChangeText}
-        secureTextEntry={isPassShowed ? true : false}
-      />
-      <TouchableOpacity
-        style={styles.showPassBtn}
-        activeOpacity={0.75}
-        onPress={togglePassShowing}
-      >
-        <Text style={styles.showPassText}>
-          {isPassShowed ? "Show" : "Hide"}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</>; */
-}
